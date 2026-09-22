@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicaise Keou — Testeur Logiciel QA | Tests Manuels & Automatisés</title>
+<meta name="description" content="Portfolio de Nicaise Keou, testeur logiciel spécialisé en tests manuels et automatisés (Playwright, GitHub Actions, JIRA, TestRail).">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://unpkg.com/vue@3.4.31/dist/vue.global.js"></script>
+</head>
+<body id="app">
+
+<div class="progress-bar" :style="{ width: scrollProgress + '%' }"></div>
+
+<header class="navbar" :class="{ scrolled: isScrolled }">
+  <div class="container nav-inner">
+    <a href="#accueil" class="logo">
+      <span class="logo-icon">◈</span>Nicaise Keou<span class="accent">.</span><span class="logo-sub">QA Tester</span>
+    </a>
+    <nav class="nav-links" :class="{ open: menuOpen }">
+      <a href="#accueil" :class="{ active: activeSection === 'accueil' }" @click="closeMenu">Accueil</a>
+      <a href="#apropos" :class="{ active: activeSection === 'apropos' }" @click="closeMenu">À propos</a>
+      <a href="#competences" :class="{ active: activeSection === 'competences' }" @click="closeMenu">Compétences</a>
+      <a href="#experience" :class="{ active: activeSection === 'experience' }" @click="closeMenu">Expérience</a>
+      <a href="#projets" :class="{ active: activeSection === 'projets' }" @click="closeMenu">Projets</a>
+      <a href="#certifications" :class="{ active: activeSection === 'certifications' }" @click="closeMenu">Certifications</a>
+      <div class="nav-actions">
+        <a href="assets/files/CV_Nine-Nicaise_KEOU_QA.pdf" download class="nav-cv" @click="closeMenu">
+          <span class="btn-cv-icon">📄</span>CV
+        </a>
+        <a href="#contact" class="nav-cta" @click="closeMenu">Contact</a>
+        <a href="https://wa.me/237682302016" target="_blank" rel="noopener" class="nav-whatsapp" aria-label="Me contacter sur WhatsApp" @click="closeMenu">
+          <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true">
+            <path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.478L4 29l7.73-1.865A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm7.03 16.4c-.294.828-1.452 1.516-2.373 1.712-.632.135-1.457.243-4.234-.907-3.554-1.472-5.84-5.09-6.02-5.325-.176-.235-1.437-1.913-1.437-3.65 0-1.737.9-2.59 1.222-2.945.294-.324.64-.406.854-.406.213 0 .428.002.615.011.198.01.462-.075.723.552.294.706.997 2.442 1.084 2.62.088.177.147.386.03.62-.117.235-.176.383-.348.59-.176.206-.37.46-.53.618-.176.176-.359.368-.155.723.206.354.912 1.505 1.958 2.437 1.345 1.2 2.478 1.572 2.833 1.748.354.176.56.147.766-.088.206-.235.883-1.03 1.118-1.384.235-.354.47-.294.795-.176.324.117 2.06.97 2.412 1.147.353.176.588.264.674.412.088.147.088.855-.207 1.683Z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+    <button class="burger" :class="{ open: menuOpen }" @click="toggleMenu" aria-label="Ouvrir le menu" :aria-expanded="menuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="accueil" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-content">
+    <p class="eyebrow reveal" v-reveal>Assurance Qualité Logicielle</p>
+    <h1 class="reveal" v-reveal>
+      Bonjour, je suis <span class="gradient-text">Nicaise Keou</span><br>
+      Testeur Logiciel <span class="typed">{{ typedText }}</span>
+    </h1>
+    <p class="hero-text reveal" v-reveal>
+      Je conçois des stratégies de test rigoureuses et je construis des suites de tests
+      automatisés fiables pour garantir la qualité, la stabilité et la performance
+      des applications avant leur mise en production.
+    </p>
+    <div class="hero-actions reveal" v-reveal>
+      <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+    </div>
+    <div class="hero-stats reveal" v-reveal v-count-in-view="startCounting">
+      <div class="stat" v-for="stat in stats" :key="stat.label">
+        <span class="stat-num">{{ stat.current }}</span><span class="stat-plus">{{ stat.suffix }}</span>
+        <p>{{ stat.label }}</p>
+      </div>
+    </div>
+  </div>
+  <a href="#apropos" class="scroll-hint" aria-label="Défiler vers le bas">
+    <span></span>
+  </a>
+</section>
+
+<!-- A PROPOS -->
+<section id="apropos" class="section">
+  <div class="container">
+    <p class="section-tag reveal" v-reveal>À propos</p>
+    <h2 class="section-title reveal" v-reveal>Qualité logicielle, méthode et rigueur</h2>
+    <div class="about-grid">
+      <div class="about-text reveal" v-reveal>
+        <p>
+          Je suis testeur logiciel (QA Engineer), titulaire d'une licence en informatique
+          et en entreprise depuis 2023 sur des applications <strong>web et mobile</strong>.
+          J'interviens sur l'ensemble du cycle de test : conception des cas de test à partir
+          des spécifications, exécution des campagnes, automatisation des parcours critiques
+          avec <strong>Playwright</strong>, validation des API et des services backend avec
+          <strong>Postman</strong>, et suivi des anomalies dans <strong>Jira</strong> jusqu'à
+          leur correction.
+        </p>
+        <p>
+          Aujourd'hui en poste à temps plein chez <strong>Aron Cloud</strong> — après un stage
+          professionnel conclu par un recrutement dans la même structure — je travaille au
+          quotidien en équipe technique dans un cadre <strong>Agile / Scrum</strong> :
+          documenter précisément une anomalie, la reproduire, la qualifier et en suivre la
+          correction jusqu'à la livraison.
+        </p>
+        <p>
+          Mon objectif : détecter les anomalies le plus tôt possible, réduire le coût de la
+          non-qualité, et donner aux équipes de développement une confiance mesurable dans
+          chaque livraison.
+        </p>
+        <ul class="about-list">
+          <li>Rédaction de cas de test fonctionnels, résultats attendus et jeux de données</li>
+          <li>Campagnes de test sur applications web et mobile, retest et non-régression</li>
+          <li>Automatisation end-to-end avec Playwright (JavaScript)</li>
+          <li>Tests d'API et validation des services backend avec Postman</li>
+          <li>Intégration des tests dans les pipelines CI/CD (GitHub Actions)</li>
+          <li>Organisation des campagnes et reporting QA (TestLink, Jira, Google Sheets)</li>
+          <li>Vérification des données en base (SQL) et lecture du code applicatif (PHP, JavaScript) pour qualifier une anomalie</li>
+        </ul>
+      </div>
+      <div class="about-card reveal" v-reveal>
+        <div class="card-glow"></div>
+        <h3>Méthodologie</h3>
+        <div class="method-item">
+          <span class="method-step">01</span>
+          <div><strong>Analyse</strong><p>Étude des spécifications, des besoins exprimés et des critères d'acceptation</p></div>
+        </div>
+        <div class="method-item">
+          <span class="method-step">02</span>
+          <div><strong>Conception</strong><p>Cas de test fonctionnels, résultats attendus, jeux de données et matrices de couverture</p></div>
+        </div>
+        <div class="method-item">
+          <span class="method-step">03</span>
+          <div><strong>Exécution</strong><p>Campagnes web &amp; mobile, tests automatisés Playwright et tests d'API Postman</p></div>
+        </div>
+        <div class="method-item">
+          <span class="method-step">04</span>
+          <div><strong>Suivi des anomalies</strong><p>Déclaration dans Jira, reproduction, qualification puis retest après correction</p></div>
+        </div>
+        <div class="method-item">
+          <span class="method-step">05</span>
+          <div><strong>Reporting</strong><p>Suivi de release et métriques qualité (TestLink, Google Sheets)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-facts reveal" v-reveal>
+      <div class="fact">
+        <span class="fact-icon">🎓</span>
+        <div><strong>Licence en informatique</strong><p>Université de Dschang — 2024</p></div>
+      </div>
+      <div class="fact">
+        <span class="fact-icon">📍</span>
+        <div><strong>Yaoundé, Cameroun</strong><p>En poste chez Aron Cloud</p></div>
+      </div>
+      <div class="fact">
+        <span class="fact-icon">🗣️</span>
+        <div><strong>Langues</strong><p>Français courant · Anglais intermédiaire</p></div>
+      </div>
+      <div class="fact">
+        <span class="fact-icon">🔄</span>
+        <div><strong>Agile / Scrum</strong><p>Travail en équipe technique</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences" class="section section-alt">
+  <div class="container">
+    <p class="section-tag reveal" v-reveal>Compétences</p>
+    <h2 class="section-title reveal" v-reveal>Boîte à outils du testeur</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">📝</div>
+        <h3>Conception de tests</h3>
+        <ul class="tag-list">
+          <li>Cas de test fonctionnels</li>
+          <li>Analyse des spécifications</li>
+          <li>Résultats attendus</li>
+          <li>Jeux de données de test</li>
+          <li>Matrices de traçabilité</li>
+          <li>Plans de test</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🧭</div>
+        <h3>Exécution &amp; non-régression</h3>
+        <ul class="tag-list">
+          <li>Campagnes de test</li>
+          <li>Applications web</li>
+          <li>Applications mobile</li>
+          <li>Test exploratoire</li>
+          <li>Retest après correction</li>
+          <li>Tests de non-régression</li>
+          <li>Test d'acceptation (UAT)</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">⚙️</div>
+        <h3>Automatisation des tests</h3>
+        <ul class="tag-list">
+          <li>Playwright</li>
+          <li>JavaScript</li>
+          <li>Tests end-to-end</li>
+          <li>Page Object Model</li>
+          <li>Suites de non-régression</li>
+          <li>Exécution multi-navigateurs</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🔗</div>
+        <h3>API &amp; intégration</h3>
+        <ul class="tag-list">
+          <li>Postman</li>
+          <li>Validation des services backend</li>
+          <li>Scénarios fonctionnels</li>
+          <li>Tests d'intégration</li>
+          <li>Non-régression API</li>
+          <li>Gestion des erreurs</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🚀</div>
+        <h3>CI/CD &amp; versioning</h3>
+        <ul class="tag-list">
+          <li>GitHub Actions</li>
+          <li>Exécution automatisée des tests</li>
+          <li>Intégration continue</li>
+          <li>Git / GitHub</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🐞</div>
+        <h3>Test management &amp; reporting</h3>
+        <ul class="tag-list">
+          <li>Jira</li>
+          <li>TestLink</li>
+          <li>Google Sheets</li>
+          <li>Cycle de vie des anomalies</li>
+          <li>Reporting QA</li>
+          <li>Suivi de release</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🗄️</div>
+        <h3>Analyse &amp; diagnostic</h3>
+        <ul class="tag-list">
+          <li>SQL</li>
+          <li>Vérification des données en base</li>
+          <li>Lecture de code (PHP, JavaScript)</li>
+          <li>Qualification d'anomalie</li>
+          <li>Analyse du comportement applicatif</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">💻</div>
+        <h3>Développement web</h3>
+        <ul class="tag-list">
+          <li>PHP natif</li>
+          <li>JavaScript</li>
+          <li>Vue.js</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>Administration de bases de données</li>
+        </ul>
+      </div>
+
+      <div class="skill-card reveal" v-reveal>
+        <div class="skill-icon">🤝</div>
+        <h3>Méthodes &amp; savoir-être</h3>
+        <ul class="tag-list">
+          <li>Agile / Scrum</li>
+          <li>Travail en équipe technique</li>
+          <li>Autonomie</li>
+          <li>Rigueur</li>
+          <li>Sens de l'organisation</li>
+          <li>Gestion des priorités</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <p class="section-tag reveal" v-reveal>Parcours</p>
+    <h2 class="section-title reveal" v-reveal>Expérience professionnelle</h2>
+    <div class="timeline">
+
+      <div class="timeline-item reveal" v-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">Mars 2026 — Aujourd'hui</span>
+          <h3>Testeur Logiciel QA</h3>
+          <p class="timeline-org">ARON CLOUD · Sur site</p>
+          <p>
+            Conception et exécution de plans de test pour des applications web et API.
+            Mise en place d'une suite de tests automatisés avec Playwright, réduisant le
+            temps de régression manuelle de 40%. Intégration des tests dans le pipeline
+            CI/CD pour une exécution à chaque déploiement.
+          </p>
+        </div>
+      </div>
+
+      <!-- <div class="timeline-item reveal" v-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">Septembre 2025 — Fevrier 2026</span>
+          <h3>Stage professionnel</h3>
+          <p class="timeline-org">ARON CLOUD · Sur site</p>
+          <p>
+            Rédaction de cas de test à partir des spécifications fonctionnelles, exécution
+            de campagnes de tests manuels, identification et suivi des anomalies dans JIRA.
+            Collaboration étroite avec les équipes de développement pour la résolution des
+            défauts avant chaque release.
+          </p>
+        </div>
+      </div> -->
+
+      <div class="timeline-item reveal" v-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">Septembre 2025 — Février 2026</span>
+          <h3>Stage professionnel— Assurance Qualité</h3>
+          <p class="timeline-org">ARON CLOUD · Sur site</p>
+          <p>
+            Découverte des méthodologies de test logiciel, participation aux campagnes
+            de tests fonctionnels et initiation aux premiers scripts d'automatisation.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets" class="section section-alt">
+  <div class="container">
+    <p class="section-tag reveal" v-reveal>Projets</p>
+    <h2 class="section-title reveal" v-reveal>Projets de test récents</h2>
+    <div class="projects-grid">
+
+      <article class="project-card reveal" v-reveal>
+        <div class="project-top">
+          <span class="project-icon">🛒</span>
+          <div class="project-badges">
+            <span class="badge">Playwright</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">CI/CD</span>
+            <span class="badge">GitHub Actions</span>
+            <span class="badge">Tests manuels</span>
+          </div>
+        </div>
+        <h3>Application de gestion d'etablissement scolaire(Scholaris)</h3>
+        <p>
+          Suite de tests end-to-end automatisés avec Playwright pour Scholaris, une
+          application de gestion d'établissement scolaire : inscription des élèves,
+          gestion des notes, emplois du temps, authentification et flux critiques de
+          validation. Architecture en Page Object Model, exécution automatique à
+          chaque merge request avec captures d'écran en cas d'échec, rapports HTML
+          détaillés et intégration GitHub Actions.
+        </p>
+        <ul class="project-points">
+          <li>100+ scénarios automatisés (élèves, enseignants, administration)</li>
+          <li>Exécution parallèle multi-navigateurs, intégrée au pipeline CI/CD</li>
+          <li>Réduction de 40% du temps de test de régression</li>
+          <li>Tests visuels des composants critiques et alerte Slack en cas d'échec</li>
+        </ul>
+        <a href="https://github.com/dohoseverin/scholaris" class="project-link">Voir le dépôt →</a>
+      </article>
+
+      <!-- <article class="project-card reveal" v-reveal>
+        <div class="project-top">
+          <span class="project-icon">🔗</span>
+          <div class="project-badges">
+            <span class="badge">Postman</span>
+            <span class="badge">Newman</span>
+            <span class="badge">CI/CD</span>
+          </div>
+        </div>
+        <h3>Suite de tests API REST</h3>
+        <p>
+          Collection Postman couvrant l'ensemble des endpoints d'une API REST :
+          validation des schémas de réponse, codes de statut, temps de réponse et
+          scénarios d'erreur. Exécution automatisée via Newman à chaque pull request.
+        </p>
+        <ul class="project-points">
+          <li>80+ requêtes testées automatiquement</li>
+          <li>Validation JSON Schema</li>
+          <li>Rapport de couverture des endpoints</li>
+        </ul>
+        <a href="#" class="project-link">Voir le dépôt →</a>
+      </article> -->
+
+      <article class="project-card reveal" v-reveal>
+        <div class="project-top">
+          <span class="project-icon">📋</span>
+          <div class="project-badges">
+            <span class="badge">Tests manuels</span>
+            <span class="badge">TestLink</span>
+            <span class="badge">JIRA</span>
+          </div>
+        </div>
+        <h3>Plan de test — Application mobile</h3>
+        <p>
+          Élaboration de plans de test complets pour des applications mobiles
+          (iOS/Android) telles que <strong>SmallPay</strong>, une plateforme de
+          paiement, et <strong>Kinouli</strong>, une application de transactions de
+          valeur (achat de crédit de communication, connexion, paiement de factures)
+          via Orange uniquement : matrice de couverture, cas de test priorisés par
+          risque, campagne de tests d'acceptation avant mise en production.
+        </p>
+        <ul class="project-points">
+          <li>150+ cas de test structurés dans TestLink</li>
+          <li>Applications testées : SmallPay (paiement), Kinouli (transactions Orange)</li>
+          <li>Priorisation par analyse de risque</li>
+          <li>0 anomalie critique en production</li>
+        </ul>
+        <a href="#" class="project-link">Voir le rapport →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<!-- <section id="certifications" class="section">
+  <div class="container">
+    <p class="section-tag reveal" v-reveal>Certifications</p>
+    <h2 class="section-title reveal" v-reveal>Formations & certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card reveal" v-reveal>
+        <div class="cert-icon">🎓</div>
+        <h3>ISTQB Foundation Level</h3>
+        <p>Certification internationale en test logiciel — année d'obtention</p>
+      </div>
+      <div class="cert-card reveal" v-reveal>
+        <div class="cert-icon">🎓</div>
+        <h3>Automatisation avec Playwright</h3>
+        <p>Formation en automatisation des tests — plateforme / organisme</p>
+      </div>
+      <div class="cert-card reveal" v-reveal>
+        <div class="cert-icon">🎓</div>
+        <h3>API Testing avec Postman</h3>
+        <p>Formation en tests d'API REST — plateforme / organisme</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- CONTACT -->
+<section id="contact" class="section section-alt">
+  <div class="container contact-container">
+    <p class="section-tag reveal" v-reveal>Contact</p>
+    <h2 class="section-title reveal" v-reveal>Discutons de votre prochain projet qualité</h2>
+    <p class="contact-sub reveal" v-reveal>
+      Disponible pour des missions de test manuel, d'automatisation ou d'audit qualité.
+      N'hésitez pas à me contacter.
+    </p>
+
+    <div class="contact-grid reveal" v-reveal>
+      <a class="contact-item" href="mailto:ninenicaisekeou@gmail.com">
+        <span class="contact-icon">✉️</span>
+        <div><strong>Email</strong><p>ninenicaisekeou@gmail.com</p></div>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/nine-nicaise-keou" target="_blank" rel="noopener">
+        <span class="contact-icon">💼</span>
+        <div><strong>LinkedIn</strong><p>linkedin.com/in/Nine nicaise keou</p></div>
+      </a>
+      <a class="contact-item" href="https://github.com/NICAISE-9" target="_blank" rel="noopener">
+        <span class="contact-icon">🐙</span>
+        <div><strong>GitHub</strong><p>github.com/NICAISE-9</p></div>
+      </a>
+    </div>
+
+    <form class="contact-form reveal" v-reveal @submit.prevent="submitForm">
+      <div class="form-row">
+        <input type="text" v-model="form.name" placeholder="Votre nom" required>
+        <input type="email" v-model="form.email" placeholder="Votre email" required>
+      </div>
+      <input type="text" v-model="form.subject" placeholder="Sujet">
+      <textarea v-model="form.message" rows="5" placeholder="Votre message" required></textarea>
+      <button type="submit" class="btn btn-primary" :disabled="sending">{{ sending ? 'Envoi…' : 'Envoyer le message' }}</button>
+      <p class="form-note">{{ formNote }}</p>
+      <p class="form-fallback">
+        Pas de réponse ? <a href="mailto:ninenicaisekeou@gmail.com">Écris-moi directement par email</a>.
+      </p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>© {{ currentYear }} Nicaise Keou — Testeur Logiciel QA. Tous droits réservés.</p>
+    <a href="#accueil" class="back-top">↑ Haut de page</a>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
