@@ -61,11 +61,17 @@
     <div class="hero-actions reveal" v-reveal>
       <a href="#projets" class="btn btn-primary">Voir mes projets</a>
     </div>
-    <div class="hero-stats reveal" v-reveal v-count-in-view="startCounting">
-      <div class="stat" v-for="stat in stats" :key="stat.label">
-        <span class="stat-num">{{ stat.current }}</span><span class="stat-plus">{{ stat.suffix }}</span>
-        <p>{{ stat.label }}</p>
-      </div>
+    <div class="hero-tools reveal" v-reveal>
+      <p class="hero-tools-label"><span>Outils du quotidien</span></p>
+      <ul class="tool-grid">
+        <li class="tool-tile" v-for="(tool, i) in tools" :key="tool.name" :style="{ '--i': i }">
+          <span class="tool-icon" aria-hidden="true">{{ tool.icon }}</span>
+          <span class="tool-text">
+            <strong>{{ tool.name }}</strong>
+            <small>{{ tool.use }}</small>
+          </span>
+        </li>
+      </ul>
     </div>
   </div>
   <a href="#apropos" class="scroll-hint" aria-label="Défiler vers le bas">
@@ -149,10 +155,6 @@
       <div class="fact">
         <span class="fact-icon">🗣️</span>
         <div><strong>Langues</strong><p>Français courant · Anglais intermédiaire</p></div>
-      </div>
-      <div class="fact">
-        <span class="fact-icon">🔄</span>
-        <div><strong>Agile / Scrum</strong><p>Travail en équipe technique</p></div>
       </div>
     </div>
   </div>
@@ -410,14 +412,14 @@
         <p>
           Élaboration de plans de test complets pour des applications mobiles
           (iOS/Android) telles que <strong>SmallPay</strong>, une plateforme de
-          paiement, et <strong>Kinouli</strong>, une application de transactions de
+          paiement, et <strong>Kinouli ProConnect</strong>, une application de transactions de
           valeur (achat de crédit de communication, connexion, paiement de factures)
           via Orange uniquement : matrice de couverture, cas de test priorisés par
           risque, campagne de tests d'acceptation avant mise en production.
         </p>
         <ul class="project-points">
           <li>150+ cas de test structurés dans TestLink</li>
-          <li>Applications testées : SmallPay (paiement), Kinouli (transactions Orange)</li>
+          <li>Applications testées : SmallPay (paiement), Kinouli ProConnect (transactions Orange)</li>
           <li>Priorisation par analyse de risque</li>
           <li>0 anomalie critique en production</li>
         </ul>

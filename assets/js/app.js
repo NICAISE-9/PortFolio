@@ -18,11 +18,14 @@ const app = Vue.createApp({
       typedText: '',
       roles: ['QA Manuel', 'Automatisation', 'CI/CD & Qualité'],
 
-      stats: [
-        { label: "Mois d'expérience", target: 6, suffix: '+', current: 0 },
-        { label: 'Cas de tests rédigés', target: 700, suffix: '+', current: 0 },
-        { label: 'Réduction du temps de régression', target: 80, suffix: '%', current: 0 },
-        { label: 'Bugs identifiés & suivis', target: 300, suffix: '+', current: 0 },
+      tools: [
+        { name: 'Playwright', use: 'Tests E2E', icon: '🎭' },
+        { name: 'Postman', use: 'Tests API', icon: '🚀' },
+        { name: 'Jira', use: 'Suivi des bugs', icon: '🐞' },
+        { name: 'GitHub Actions', use: 'CI/CD', icon: '⚙️' },
+        { name: 'TestLink', use: 'Campagnes', icon: '🗂️' },
+        { name: 'Agile / Scrum', use: 'Méthode', icon: '🔄' },
+        { name: 'Git', use: 'Versioning', icon: '🌿' },
       ],
 
       form: { name: '', email: '', subject: '', message: '' },
@@ -109,23 +112,6 @@ const app = Vue.createApp({
       setTimeout(loop, 600);
     },
 
-    /* Animated stat counters, triggered once the hero stats scroll into view */
-    startCounting() {
-      const duration = 1200;
-      const start = performance.now();
-      const targets = this.stats.map((s) => s.target);
-
-      const tick = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        this.stats.forEach((stat, i) => {
-          stat.current = Math.round(eased * targets[i]);
-        });
-        if (progress < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    },
-
     /* Contact form: envoie réellement l'email via Web3Forms (pas d'app mail requise) */
     async submitForm() {
       const subject = this.form.subject || 'Contact depuis le portfolio';
@@ -187,24 +173,6 @@ app.directive('reveal', {
         });
       },
       { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
-    io.observe(el);
-  },
-});
-
-/* Custom directive: calls the bound method once when the element scrolls into view */
-app.directive('count-in-view', {
-  mounted(el, binding) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            binding.value();
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
     );
     io.observe(el);
   },
